@@ -14,9 +14,20 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using FireSharp.Config;
 using FireSharp;
+using FireSharp.Response;
 
 namespace Test_Firebase
 {
+    public class Zombie 
+    {
+        public string Name { get; set; }
+        public int Age { get; set; }
+        public string Type { get; set; }
+        public string LastKnownLocation { get; set; }
+        public string Speciality { get; set; }
+        public bool EatsBrains { get; set; }
+
+    }
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
@@ -40,8 +51,11 @@ namespace Test_Firebase
             {
                 //SET DATA
                 //await client.SetAsync("BrycesMom/data2", TXT.Text);
-                await client.PushAsync("BrycesMom/PushData", TXT.Text);
-                string st = response
+                //await client.PushAsync("BrycesMom/PushData", TXT.Text);
+                //FirebaseResponse response = await client.GetAsync("Test/SetData");
+                //string st = response.ResultAs<string>();
+                Zombie zombie = new Zombie { Name = "Phil", Age = 234, Type = "Walking", LastKnownLocation = "Janitors Closet", Speciality = "Tank", EatsBrains = true};
+                await client.SetAsync("DATA/Z2", zombie);
                 MessageBox.Show("done.");
             }
             catch (Exception)
